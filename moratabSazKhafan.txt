@@ -1,0 +1,58 @@
+//package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    private static int maxN = 1100;
+    static String[] names = new String[maxN];
+    static double[] averages = new double[maxN];
+    static int[] sports = new int[maxN], perm = new int[maxN];
+
+    public static void main(String[] args) {
+        Scanner scanner  = new Scanner(System.in);
+        int n = scanner.nextInt();
+
+
+
+        for (int i=0; i<n; i++) {
+            perm[i] = i;
+            names[i] = scanner.next();
+            int count = scanner.nextInt();
+            double sum = 0;
+            for (int j=0; j<count; j++){
+                double grade = scanner.nextDouble();
+                sum += grade;
+            }
+
+            averages[i] = sum / count;
+
+            sports[i] = scanner.nextInt();
+            for (int j=0; j<sports[i]; j++)
+                scanner.next();
+
+        }
+
+        for (int i=0; i<n; i++)
+            for (int j=1; j<n; j++)
+                if(better(perm[j], perm[j - 1])){
+                    int temp = perm[j];
+                    perm[j] = perm[j - 1];
+                    perm[j - 1] = temp;
+                }
+
+        for (int i=0; i<n; i++)
+            System.out.println(names[perm[i]]);
+
+    }
+
+    private static boolean better(int id1, int id2) {
+        if((int) averages[id1] != (int) averages[id2])
+            return averages[id1] > averages[id2];
+	if(sports[id1] != sports[id2])
+            return sports[id1] > sports[id2];
+	return id1 < id2;
+    }
+
+}
+

@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class Main {    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        String[] str = new String[101];
+        for(int i = 1; i <= 100; i++){
+            str[i] = new String();
+        }
+        
+        int n = scanner.nextInt();
+        for(int query = 0; query < n; query++){
+            int type, idx, len;
+            String s;
+            type = scanner.nextInt();
+            idx = scanner.nextInt();
+            len = scanner.nextInt();
+            s = scanner.next();
+            
+            if(type == 1){
+                str[idx] += s;
+            }else{
+                int cnt = 0;
+                for(int i = 0; i <= str[idx].length() - s.length(); i++){
+                    boolean match = true;
+                    for(int j = 0; j < s.length(); j++){
+                        if(s.charAt(j) != str[idx].charAt(j+i)){
+                            match = false;
+                        }
+                    }
+                    if(match){
+                        cnt ++;
+                    }
+                }
+                System.out.println(cnt);
+                
+            }
+            
+	       
+        }
+
+
+    }
+}
+
+
